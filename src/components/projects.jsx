@@ -26,7 +26,7 @@ export function Projects() {
       image: QuestHub,
       technologies: ["React", "Tailwind"],
       github: "https://github.com/justjianpier/questhub.git",
-      demo: "https:questhub-app.netlify.app/",
+      demo: "https://questhub-app.netlify.app",
     },
     {
       id: 3,
@@ -36,7 +36,7 @@ export function Projects() {
       image: Dashboard,
       technologies: ["React", "Tailwind"],
       github: "https://github.com/justjianpier/personal-dashboard.git",
-      demo: "https:dashboardexa.netlify.app",
+      demo: "https://dashboardexa.netlify.app",
     },
   ];
 
