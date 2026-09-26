@@ -1,4 +1,4 @@
-import { Code, GraduationCap } from "lucide-react";
+import { GraduationCap } from "lucide-react";
 import { motion } from "framer-motion";
 
 export function Education() {
@@ -11,15 +11,6 @@ export function Education() {
       description:
         "Actualmente cursando el séptimo ciclo. Formación en desarrollo de software, estructuras de datos, bases de datos y tecnologías web.",
       icon: <GraduationCap size={20} />,
-    },
-    {
-      id: 2,
-      date: "2026 - En curso",
-      title: "Desarrollo Web Full Stack",
-      institute: "Código TECSUP",
-      description:
-        "Especialización enfocada en desarrollo de aplicaciones web modernas con tecnologías frontend y backend.",
-      icon: <Code size={20} />,
     },
   ];
 
@@ -55,13 +46,13 @@ export function Education() {
           </h2>
 
           <p className="mt-6 text-lg leading-relaxed text-zinc-400">
-            Mi formación académica y especialización en desarrollo de software
-            con enfoque en tecnologías web modernas.
+            Formación universitaria en Ingeniería de Sistemas e Informática,
+            complementada con experiencia profesional y proyectos frontend.
           </p>
         </div>
 
         <motion.div
-          className="relative border-l border-zinc-800 pl-10 space-y-10"
+          className="relative space-y-10 border-l border-zinc-800 pl-6 sm:pl-10"
           variants={container}
           initial="hidden"
           whileInView="show"
@@ -70,7 +61,7 @@ export function Education() {
           {list.map((itemData) => (
             <motion.article
               key={itemData.id}
-              className="relative rounded-3xl border border-zinc-800 bg-zinc-950 p-8 transition-all duration-300 hover:-translate-y-1 hover:border-zinc-700 hover:bg-zinc-900"
+              className="relative rounded-3xl border border-zinc-800 bg-zinc-950 p-6 sm:p-8 transition-all duration-300 hover:-translate-y-1 hover:border-zinc-700 hover:bg-zinc-900"
               variants={item}
             >
               <div className="absolute -left-5 top-8 flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900 text-indigo-400 ring-1 ring-zinc-800">

@@ -1,113 +1,246 @@
-import { Mail, Phone } from "lucide-react";
-import { FaGithub } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { ArrowRight, ArrowUpRight, Check, Copy } from "lucide-react";
+
+const email = "jianpierdev@gmail.com";
+
+const contacts = [
+  {
+    label: "LinkedIn",
+    detail: "Mi perfil profesional",
+    href: "https://www.linkedin.com/in/jian-pier-campos-sulca-0b5370416",
+    external: true,
+  },
+  {
+    label: "GitHub",
+    detail: "@justjianpier",
+    href: "https://github.com/justjianpier",
+    external: true,
+  },
+  {
+    label: "Teléfono",
+    detail: "+51 912 528 150",
+    href: "tel:+51912528150",
+  },
+];
 
 export function ContactMe() {
-  const contacts = [
-    {
-      icon: <Mail size={24} />,
-      label: "Email",
-      value: "jianpierdev@gmail.com",
+  const [copyStatus, setCopyStatus] = useState("idle");
+  const reduceMotion = useReducedMotion();
+
+  useEffect(() => {
+    if (copyStatus !== "copied") return;
+
+    const timeout = window.setTimeout(() => setCopyStatus("idle"), 2500);
+    return () => window.clearTimeout(timeout);
+  }, [copyStatus]);
+
+  async function copyEmail() {
+    try {
+      await navigator.clipboard.writeText(email);
+      setCopyStatus("copied");
+    } catch {
+      setCopyStatus("error");
+    }
+  }
+
+  const reveal = {
+    hidden: { opacity: 0, y: reduceMotion ? 0 : 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: reduceMotion ? 0 : 0.65,
+        ease: [0.22, 1, 0.36, 1],
+      },
     },
-    {
-      icon: <FaGithub size={24} />,
-      label: "GitHub",
-      value: "github.com/justjianpier",
-    },
-    {
-      icon: <Phone size={24} />,
-      label: "Celular",
-      value: "+51 912 528 150",
-    },
-  ];
+  };
 
   return (
-    <section id="contact" className="bg-black py-32 overflow-x-hidden">
-      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
-        {/* Header */}
-        <div className="mb-20 text-center lg:text-left">
-          <span className="text-sm uppercase tracking-[0.2em] text-zinc-500">
-            Contacto
-          </span>
+    <motion.section
+      id="contact"
+      aria-labelledby="contact-title"
+      className="bg-black py-24 md:py-32"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.15 }}
+      variants={{
+        hidden: {},
+        visible: {
+          transition: { staggerChildren: reduceMotion ? 0 : 0.12 },
+        },
+      }}
+    >
+      <div className="mx-auto w-[90%] max-w-6xl">
+        <motion.div
+          aria-hidden="true"
+          className="h-px origin-left bg-zinc-800"
+          variants={{
+            hidden: { scaleX: reduceMotion ? 1 : 0 },
+            visible: {
+              scaleX: 1,
+              transition: { duration: reduceMotion ? 0 : 0.9 },
+            },
+          }}
+        />
 
-          <h2 className="mt-4 text-5xl font-bold tracking-tight text-white md:text-6xl">
-            Hablemos
-          </h2>
+        <motion.div
+          className="mt-6 flex items-center justify-between gap-4 text-xs text-zinc-400 sm:text-sm"
+          variants={reveal}
+        >
+          <span className="uppercase tracking-[0.2em]">Contacto</span>
+          <span>Lima, Perú</span>
+        </motion.div>
 
-          <p className="mt-6 max-w-2xl text-lg text-zinc-400 mx-auto lg:mx-0">
-            Estoy abierto a prácticas, oportunidades laborales y proyectos
-            freelance.
-          </p>
-        </div>
+        <div className="mt-14 grid gap-14 sm:mt-16 lg:grid-cols-[1.1fr_1fr] lg:gap-20">
+          <div>
+            <motion.h2
+              id="contact-title"
+              className="text-[clamp(2.75rem,5.8vw,5.25rem)] font-medium leading-[1.1] tracking-[-0.05em] text-white"
+              variants={reveal}
+            >
+              Hablemos de{" "}
+              <span className="mt-1 block font-serif font-normal italic tracking-[-0.04em] text-zinc-300">
+                lo que{" "}
+                <span className="relative inline-block">
+                  sigue.
+                  <svg
+                    aria-hidden="true"
+                    className="absolute -bottom-2 left-0 h-3 w-full text-indigo-400/80 sm:h-4"
+                    viewBox="0 0 240 18"
+                    fill="none"
+                    preserveAspectRatio="none"
+                  >
+                    <motion.path
+                      d="M3 13C67 3 152 3 237 8"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      variants={{
+                        hidden: { pathLength: reduceMotion ? 1 : 0 },
+                        visible: {
+                          pathLength: 1,
+                          transition: {
+                            duration: reduceMotion ? 0 : 0.8,
+                            delay: reduceMotion ? 0 : 0.3,
+                            ease: "easeOut",
+                          },
+                        },
+                      }}
+                    />
+                  </svg>
+                </span>
+              </span>
+            </motion.h2>
 
-        <div className="grid gap-6 grid-cols-1 lg:grid-cols-2">
-          <div className="space-y-6">
-            {contacts.map((item) => (
-              <div
-                key={item.label}
-                className="flex items-center gap-4 sm:gap-6 rounded-3xl border border-zinc-800 bg-zinc-950 p-6 sm:p-8"
-              >
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-zinc-800/30 text-indigo-400">
-                  {item.icon}
-                </div>
-
-                <div>
-                  <p className="text-zinc-500">{item.label}</p>
-                  <p className="text-xl font-semibold text-white">
-                    {item.value}
-                  </p>
-                </div>
-              </div>
-            ))}
-
-            <div className="rounded-3xl border border-green-500/20 bg-green-500/10 p-6 sm:p-8">
-              <div className="flex items-center gap-3">
-                <div className="relative flex h-3 w-3 items-center justify-center">
-                  <span className="absolute h-3 w-3 animate-ping rounded-full bg-green-500 opacity-75"></span>
-                  <span className="relative h-2.5 w-2.5 rounded-full bg-green-500" />
-                </div>
-                <h3 className="text-2xl font-semibold text-green-400">
-                  Disponible para oportunidades
-                </h3>
-              </div>
-
-              <p className="mt-4 text-zinc-300">
-                Actualmente buscando prácticas profesionales, posiciones junior
-                y proyectos freelance relacionados con desarrollo frontend.
-              </p>
-            </div>
+            <motion.p
+              className="mt-9 max-w-sm text-base leading-8 text-zinc-400 sm:text-lg"
+              variants={reveal}
+            >
+              Estoy buscando mi próximo equipo frontend. Si crees que puedo
+              encajar, o tienes un proyecto en mente, me gustaría conocerte.
+            </motion.p>
           </div>
 
-          <div className="flex flex-col justify-center rounded-3xl border border-zinc-800 bg-zinc-950 p-6 sm:p-10">
-            <span className="text-sm uppercase tracking-[0.2em] text-zinc-500">
-              Disponible
-            </span>
-            <h3 className="mt-4 text-4xl font-bold text-white">
-              ¿Tienes una idea o proyecto?
-            </h3>
-            <p className="mt-6 text-lg leading-relaxed text-zinc-400">
-              Me interesa participar en proyectos donde pueda aportar valor,
-              seguir aprendiendo y colaborar con equipos que construyan
-              productos digitales de calidad.
-            </p>
-
-            <div className="mt-10 flex flex-wrap gap-4">
+          <div className="min-w-0 lg:pt-2">
+            <motion.div variants={reveal}>
+              <p className="text-sm text-zinc-400">Puedes escribirme a</p>
               <a
-                href="mailto:jianpierdev@gmail.com"
-                className="rounded-full bg-indigo-400 px-6 py-3 font-medium text-white transition hover:bg-[#0077ed]"
+                href={`mailto:${email}`}
+                className="group relative mt-2 flex items-center justify-between gap-3 border-b border-zinc-700 py-4 text-white transition-colors hover:text-indigo-300 focus-visible:text-indigo-300"
               >
-                Enviar correo
+                <span className="min-w-0 text-[clamp(1.25rem,2.1vw,1.75rem)] tracking-tight [overflow-wrap:anywhere]">
+                  {email}
+                </span>
+                <ArrowUpRight
+                  size={24}
+                  aria-hidden="true"
+                  className="shrink-0 motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:-translate-y-1 motion-safe:group-hover:translate-x-1 motion-safe:group-focus-visible:-translate-y-1 motion-safe:group-focus-visible:translate-x-1"
+                />
+                <span
+                  aria-hidden="true"
+                  className="absolute -bottom-px left-0 h-px w-full origin-left scale-x-0 bg-indigo-300 motion-safe:transition-transform motion-safe:duration-300 group-hover:scale-x-100 group-focus-visible:scale-x-100"
+                />
               </a>
 
-              <a
-                href="#projects"
-                className="rounded-full border border-zinc-700 px-6 py-3 text-white transition hover:border-zinc-500"
+              <button
+                type="button"
+                onClick={copyEmail}
+                disabled={copyStatus === "copied"}
+                aria-label="Copiar correo electrónico"
+                className="mt-3 -ml-2 inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-sm px-2 text-sm text-zinc-400 transition-colors hover:text-white disabled:cursor-default disabled:text-zinc-200"
               >
-                Ver proyectos
-              </a>
-            </div>
+                <AnimatePresence initial={false} mode="wait">
+                  <motion.span
+                    key={copyStatus === "copied" ? "copied" : "copy"}
+                    aria-hidden="true"
+                    initial={{ opacity: 0, y: reduceMotion ? 0 : 4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: reduceMotion ? 0 : -4 }}
+                    transition={{ duration: reduceMotion ? 0 : 0.15 }}
+                  >
+                    {copyStatus === "copied" ? (
+                      <Check size={15} />
+                    ) : (
+                      <Copy size={15} />
+                    )}
+                  </motion.span>
+                </AnimatePresence>
+                {copyStatus === "copied" ? "Copiado" : "Copiar correo"}
+              </button>
+              <p
+                role="status"
+                className={
+                  copyStatus === "error"
+                    ? "mt-2 text-sm leading-relaxed text-zinc-400"
+                    : "sr-only"
+                }
+              >
+                {copyStatus === "copied"
+                  ? "Dirección de correo copiada al portapapeles."
+                  : copyStatus === "error"
+                    ? "No se pudo copiar. Puedes seleccionar la dirección de arriba."
+                    : ""}
+              </p>
+            </motion.div>
+
+            <motion.ul className="mt-9" variants={reveal}>
+              {contacts.map((contact) => (
+                <li key={contact.label} className="border-b border-zinc-800">
+                  <a
+                    href={contact.href}
+                    target={contact.external ? "_blank" : undefined}
+                    rel={contact.external ? "noopener noreferrer" : undefined}
+                    className="group flex items-center justify-between gap-4 py-5"
+                  >
+                    <span className="grid gap-1 sm:grid-cols-[5rem_1fr] sm:items-baseline sm:gap-4">
+                      <span className="text-sm text-zinc-200 transition-colors group-hover:text-white">
+                        {contact.label}
+                      </span>
+                      <span className="text-sm text-zinc-400">
+                        {contact.detail}
+                      </span>
+                    </span>
+                    {contact.external ? (
+                      <ArrowUpRight
+                        size={17}
+                        aria-hidden="true"
+                        className="shrink-0 text-zinc-500 transition-colors group-hover:text-white group-focus-visible:text-white motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5 motion-safe:group-focus-visible:-translate-y-0.5 motion-safe:group-focus-visible:translate-x-0.5"
+                      />
+                    ) : (
+                      <ArrowRight
+                        size={17}
+                        aria-hidden="true"
+                        className="shrink-0 text-zinc-500 transition-colors group-hover:text-white group-focus-visible:text-white motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:translate-x-1 motion-safe:group-focus-visible:translate-x-1"
+                      />
+                    )}
+                  </a>
+                </li>
+              ))}
+            </motion.ul>
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

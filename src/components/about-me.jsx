@@ -1,4 +1,4 @@
-import { Code2, Lightbulb, Target, Users } from "lucide-react";
+import { Code2, Blocks, Target, GitBranch } from "lucide-react";
 import { motion } from "framer-motion";
 
 export function AboutMe() {
@@ -8,28 +8,28 @@ export function AboutMe() {
       icon: <Code2 size={22} />,
       title: "Desarrollo Frontend",
       description:
-        "Construcción de interfaces modernas utilizando React y Tailwind CSS.",
+        "Interfaces responsive con React, TypeScript, Next.js y Tailwind CSS, conectadas a APIs REST.",
     },
     {
       id: 2,
-      icon: <Lightbulb size={22} />,
-      title: "Aprendizaje Continuo",
+      icon: <Blocks size={22} />,
+      title: "Componentes Reutilizables",
       description:
-        "Explorando constantemente nuevas tecnologías, patrones de diseño y buenas prácticas de desarrollo.",
+        "Implementación de nuevas funcionalidades y componentes mantenibles para la evolución de aplicaciones web.",
     },
     {
       id: 3,
-      icon: <Users size={22} />,
-      title: "Trabajo Colaborativo",
+      icon: <GitBranch size={22} />,
+      title: "Herramientas de Desarrollo",
       description:
-        "Experiencia en proyectos académicos trabajando en equipo usando Git y GitHub.",
+        "Control de versiones con Git y GitHub, y uso de Postman para trabajar con APIs.",
     },
     {
       id: 4,
       icon: <Target size={22} />,
       title: "Enfoque en Calidad",
       description:
-        "Interés por crear aplicaciones accesibles, mantenibles y optimizadas en rendimiento.",
+        "Corrección de errores y mejoras de rendimiento, SEO y experiencia de usuario en proyectos existentes.",
     },
   ];
 
@@ -60,11 +60,11 @@ export function AboutMe() {
           </h2>
 
           <p className="mt-6 max-w-2xl mx-auto text-lg leading-relaxed text-zinc-400">
-            Soy estudiante de Ingeniería de Sistemas y desarrollador frontend en
-            formación, apasionado por crear experiencias web modernas. Cuando no
-            estoy programando, suelo explorar nuevas tecnologías, mejorar mis
-            habilidades de desarrollo y dedicar tiempo a mis intereses
-            personales.
+            Soy desarrollador frontend junior y estudiante de Ingeniería de
+            Sistemas e Informática en la Universidad Tecnológica del Perú,
+            actualmente en séptimo ciclo. Busco seguir
+            creciendo en un equipo donde pueda aportar y aprender construyendo
+            productos útiles.
           </p>
         </div>
 

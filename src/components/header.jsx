@@ -6,19 +6,28 @@ export function Header() {
 
   const links = [
     { id: 1, label: "Sobre mí", href: "#about-me" },
-    { id: 2, label: "Skills", href: "#skills" },
-    { id: 3, label: "Proyectos", href: "#projects" },
-    { id: 4, label: "Formación", href: "#education" },
+    { id: 2, label: "Experiencia", href: "#experience" },
+    { id: 3, label: "Tecnologías", href: "#skills" },
+    { id: 4, label: "Proyectos", href: "#projects" },
+    { id: 5, label: "Formación", href: "#education" },
   ];
 
   return (
     <header className="sticky top-0 z-50 border-b border-zinc-900 bg-[#0a0a0a]">
       <div className="mx-auto flex h-20 w-[90%] max-w-6xl items-center justify-between">
-        <a href="#" className="font-bold text-xl text-white">
+        <a
+          href="#"
+          onClick={() => setOpen(false)}
+          aria-label="Jian Pier, inicio"
+          className="font-bold text-xl text-white"
+        >
           {"<Jian />"}
         </a>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav
+          aria-label="Navegación principal"
+          className="hidden items-center gap-6 lg:flex"
+        >
           {links.map((link) => (
             <a
               key={link.id}
@@ -32,43 +41,50 @@ export function Header() {
 
         <a
           href="#contact"
-          className="hidden md:flex rounded-full border border-zinc-700 bg-zinc-900/40 px-5 py-2.5 text-sm text-white hover:border-zinc-500"
+          className="hidden lg:flex rounded-full border border-zinc-700 bg-zinc-900/40 px-5 py-2.5 text-sm text-white hover:border-zinc-500"
         >
           Contacto
         </a>
 
         <button
+          type="button"
           onClick={() => setOpen(!open)}
-          className="md:hidden text-zinc-300"
+          aria-label={open ? "Cerrar menú" : "Abrir menú"}
+          aria-expanded={open}
+          aria-controls="mobile-navigation"
+          className="rounded-lg p-2 text-zinc-300 lg:hidden"
         >
           {open ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {open && (
-        <div className="md:hidden border-t border-zinc-900 bg-[#0a0a0a]">
-          <div className="flex flex-col px-6 py-6 space-y-6">
-            {links.map((link) => (
-              <a
-                key={link.id}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className="text-zinc-400 text-base hover:text-white transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
-
+      <nav
+        id="mobile-navigation"
+        aria-label="Navegación móvil"
+        hidden={!open}
+        className="absolute inset-x-0 top-full max-h-[calc(100dvh-5rem)] overflow-y-auto border-t border-zinc-900 bg-[#0a0a0a] lg:hidden"
+      >
+        <div className="flex flex-col px-6 py-6 space-y-6">
+          {links.map((link) => (
             <a
-              href="#contact"
+              key={link.id}
+              href={link.href}
               onClick={() => setOpen(false)}
-              className="mt-4 inline-flex w-fit rounded-full border border-zinc-700 bg-zinc-900/40 px-5 py-2.5 text-sm text-white"
+              className="text-zinc-400 text-base hover:text-white transition-colors"
             >
-              Contacto
+              {link.label}
             </a>
-          </div>
+          ))}
+
+          <a
+            href="#contact"
+            onClick={() => setOpen(false)}
+            className="mt-4 inline-flex w-fit rounded-full border border-zinc-700 bg-zinc-900/40 px-5 py-2.5 text-sm text-white"
+          >
+            Contacto
+          </a>
         </div>
-      )}
+      </nav>
     </header>
   );
 }

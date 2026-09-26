@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 import CoralStore from "../assets/coral-screenshot.jpeg";
 import QuestHub from "../assets/questhub-screenshot.jpeg";
-import Dashboard from "../assets/dashboard-screenshot.png"
+import Dashboard from "../assets/dashboard-screenshot.png";
 
 export function Projects() {
   const projects = [

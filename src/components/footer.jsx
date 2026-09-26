@@ -1,13 +1,14 @@
 import { Mail } from "lucide-react";
-import { FaGithub } from "react-icons/fa";
+import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 
 export function Footer() {
   const links = [
-    {id: 1, section: "about-me", title: "Sobre Mí" },
-    {id: 2, section: "skills", title:  "Skills"},
-    {id: 3, section: "projects", title: "Proyectos" },
-    {id: 4, section: "education", title: "Formación" },
-  ]
+    { id: 1, section: "about-me", title: "Sobre mí" },
+    { id: 2, section: "experience", title: "Experiencia" },
+    { id: 3, section: "skills", title: "Tecnologías" },
+    { id: 4, section: "projects", title: "Proyectos" },
+    { id: 5, section: "education", title: "Formación" },
+  ];
 
   return (
     <footer className="border-t border-zinc-900 bg-black">
@@ -17,8 +18,9 @@ export function Footer() {
             <h3 className="text-xl font-semibold text-white">{"<Jian />"}</h3>
 
             <p className="mt-4 text-sm leading-relaxed text-zinc-500">
-              Desarrollador Frontend apasionado por crear experiencias web
-              modernas, rápidas y accesibles.
+              Desarrollador frontend junior con experiencia profesional en
+              React, TypeScript y Next.js. Interfaces web con foco en la
+              experiencia de usuario.
             </p>
           </div>
 
@@ -41,13 +43,27 @@ export function Footer() {
             <div className="mt-4 flex gap-3">
               <a
                 href="https://github.com/justjianpier"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub de Jian Pier"
                 className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-800 transition"
               >
                 <FaGithub size={18} />
               </a>
 
               <a
-                href="#contact"
+                href="https://www.linkedin.com/in/jian-pier-campos-sulca-0b5370416"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn de Jian Pier"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-800 transition"
+              >
+                <FaLinkedinIn size={18} />
+              </a>
+
+              <a
+                href="mailto:jianpierdev@gmail.com"
+                aria-label="Enviar correo a Jian Pier"
                 className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-800 transition"
               >
                 <Mail size={18} />
