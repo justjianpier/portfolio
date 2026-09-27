@@ -5,12 +5,13 @@ export function Experience() {
   const contributions = [
     "Desarrollé y mantuve interfaces web con React, TypeScript, Next.js y Tailwind CSS.",
     "Implementé nuevas funcionalidades y componentes reutilizables en aplicaciones existentes.",
+    "Desarrollé interfaces y vistas utilizando Laravel y PHP, integrándolas con la lógica y servicios de las aplicaciones",
     "Corregí errores y realicé mejoras de rendimiento, SEO y experiencia de usuario.",
     "Participé en el análisis de requerimientos y desarrollo de soluciones para distintos proyectos web.",
     "Desarrollé e integré un chatbot web con n8n, configurando flujos automatizados para gestionar interacciones con usuarios.",
   ];
 
-  const technologies = ["React", "TypeScript", "Next.js", "Tailwind CSS", "n8n"];
+  const technologies = ["React", "TypeScript", "Next.js", "Php", "Laravel", "Tailwind CSS", "n8n"];
 
   return (
     <section id="experience" className="bg-black py-24 md:py-32" aria-labelledby="experience-title">

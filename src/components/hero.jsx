@@ -44,7 +44,7 @@ export function Hero() {
               Ver proyectos
             </a>
             <a
-              href="/cv.pdf"
+              href="/CV_JianPierCamposSulca.pdf"
               target="_blank"
               download="CV_JianPierCamposSulca.pdf"
               rel="noreferrer"
